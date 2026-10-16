@@ -2,7 +2,6 @@ import 'dart:convert';
 import 'package:flutter/services.dart';
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
-import 'models.dart';
 
 class DatabaseHelper {
   static final DatabaseHelper instance = DatabaseHelper._init();
@@ -103,6 +102,7 @@ class DatabaseHelper {
         });
       }
     } catch (e) {
+      // ignore: avoid_print
       print('Error seeding database: \$e');
     }
   }

@@ -1,6 +1,5 @@
 import 'package:flutter/services.dart' show rootBundle;
 import 'dart:convert';
-import 'package:sqflite/sqflite.dart';
 import '../data/database_helper.dart';
 import 'parser_output_dto.dart';
 import 'vector_math.dart';

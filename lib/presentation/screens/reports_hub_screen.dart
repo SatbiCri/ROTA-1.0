@@ -1,4 +1,3 @@
-import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';
@@ -115,7 +114,7 @@ class _FinancialReportsView extends ConsumerWidget {
         );
       },
       loading: () => const Center(child: CircularProgressIndicator(color: AppColors.electricCyan)),
-      error: (e, s) => Center(child: Text('Error: \$e', style: const TextStyle(color: AppColors.laserCoral))),
+      error: (e, s) => const Center(child: Text('Error: \$e', style: TextStyle(color: AppColors.laserCoral))),
     );
   }
 
@@ -168,7 +167,7 @@ class _FinancialReportsView extends ConsumerWidget {
                   ],
                 ),
               );
-            }).toList(),
+            }),
             if (footerText != null) ...[
               const Divider(color: AppColors.borderLine),
               Text(
@@ -221,13 +220,13 @@ class _MemoryCenterView extends ConsumerWidget {
                   margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
                   child: ListTile(
                     title: Text(mem.kataKunci, style: const TextStyle(color: AppColors.electricCyan, fontWeight: FontWeight.bold)),
-                    subtitle: Text('Akun: \$akunName', style: const TextStyle(color: AppColors.secondaryText)),
+                    subtitle: Text('Akun: $akunName', style: const TextStyle(color: AppColors.secondaryText)),
                     trailing: Row(
                       mainAxisSize: MainAxisSize.min,
                       children: [
                         Chip(
-                          label: Text('Freq: \${mem.frekuensi}'),
-                          backgroundColor: AppColors.cyberViolet.withOpacity(0.2),
+                          label: const Text('Freq: \${mem.frekuensi}'),
+                          backgroundColor: AppColors.cyberViolet.withValues(alpha: 0.2),
                           labelStyle: const TextStyle(color: AppColors.cyberViolet),
                         ),
                         IconButton(
@@ -252,11 +251,11 @@ class _MemoryCenterView extends ConsumerWidget {
             );
           },
           loading: () => const Center(child: CircularProgressIndicator(color: AppColors.electricCyan)),
-          error: (e, s) => Center(child: Text('Error: \$e', style: const TextStyle(color: AppColors.laserCoral))),
+          error: (e, s) => const Center(child: Text('Error: \$e', style: TextStyle(color: AppColors.laserCoral))),
         );
       },
       loading: () => const Center(child: CircularProgressIndicator(color: AppColors.electricCyan)),
-      error: (e, s) => Center(child: Text('Error: \$e', style: const TextStyle(color: AppColors.laserCoral))),
+      error: (e, s) => const Center(child: Text('Error: \$e', style: TextStyle(color: AppColors.laserCoral))),
     );
   }
 
@@ -275,7 +274,7 @@ class _MemoryCenterView extends ConsumerWidget {
                 mainAxisSize: MainAxisSize.min,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text('Kata Kunci: \$kataKunci', style: const TextStyle(color: AppColors.secondaryText)),
+                  const Text('Kata Kunci: \$kataKunci', style: TextStyle(color: AppColors.secondaryText)),
                   const SizedBox(height: 16),
                   const Text('Pilih Akun Baru:', style: TextStyle(color: AppColors.primaryText)),
                   DropdownButton<int>(
@@ -308,6 +307,7 @@ class _MemoryCenterView extends ConsumerWidget {
                     final db = await DatabaseHelper.instance.database;
                     await db.update('user_knowledge_cache', {'akun_id': selectedAkunId}, where: 'id = ?', whereArgs: [id]);
                     ref.invalidate(knowledgeCacheProvider);
+                    if (!context.mounted) return;
                     Navigator.pop(context);
                   },
                   child: const Text('Simpan', style: TextStyle(color: AppColors.canvasBackground, fontWeight: FontWeight.bold)),

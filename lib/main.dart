@@ -21,7 +21,6 @@ class MyApp extends StatelessWidget {
           primary: AppColors.electricCyan,
           secondary: AppColors.neonMint,
           surface: AppColors.cardSurface,
-          background: AppColors.canvasBackground,
           error: AppColors.laserCoral,
         ),
         useMaterial3: true,

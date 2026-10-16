@@ -1,4 +1,3 @@
-import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';
@@ -53,7 +52,7 @@ class EquationScreen extends ConsumerWidget {
                    mutasi = (account.posisiNormal == 'DEBIT') ? (debit - kredit) : (kredit - debit);
                 }
 
-                transactions[id]['mutasi'][kodeAkun] = (transactions[id]['mutasi'][kodeAkun] ?? 0.0) + mutasi;
+                transactions[id]!['mutasi'][kodeAkun] = ((transactions[id]!['mutasi'][kodeAkun] as double?) ?? 0.0) + mutasi;
               }
 
               // Calculate total balances
@@ -94,7 +93,7 @@ class EquationScreen extends ConsumerWidget {
                         Container(
                           padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
                           decoration: BoxDecoration(
-                            color: isBalanced ? AppColors.neonMint.withOpacity(0.2) : AppColors.laserCoral.withOpacity(0.2),
+                            color: isBalanced ? AppColors.neonMint.withValues(alpha: 0.2) : AppColors.laserCoral.withValues(alpha: 0.2),
                             borderRadius: BorderRadius.circular(16),
                           ),
                           child: Text(
@@ -114,8 +113,8 @@ class EquationScreen extends ConsumerWidget {
                       child: SingleChildScrollView(
                         scrollDirection: Axis.horizontal,
                         child: DataTable(
-                          headingRowColor: MaterialStateProperty.all(AppColors.cardSurface),
-                          dataRowColor: MaterialStateProperty.all(AppColors.canvasBackground),
+                          headingRowColor: WidgetStateProperty.all(AppColors.cardSurface),
+                          dataRowColor: WidgetStateProperty.all(AppColors.canvasBackground),
                           dividerThickness: 1,
                           border: TableBorder.all(color: AppColors.borderLine),
                           columns: [
@@ -141,9 +140,9 @@ class EquationScreen extends ConsumerWidget {
                                   ...equityAccounts.map((a) => _buildDataCell(mutasi[a.kodeAkun] ?? 0.0, formatter)),
                                 ],
                               );
-                            }).toList(),
+                            }),
                             DataRow(
-                              color: MaterialStateProperty.all(AppColors.cardSurface),
+                              color: WidgetStateProperty.all(AppColors.cardSurface),
                               cells: [
                                 const DataCell(Text('TOTAL', style: TextStyle(fontWeight: FontWeight.bold, color: AppColors.primaryText))),
                                 const DataCell(Text('')),
@@ -163,11 +162,11 @@ class EquationScreen extends ConsumerWidget {
               );
             },
             loading: () => const Center(child: CircularProgressIndicator(color: AppColors.electricCyan)),
-            error: (err, stack) => Center(child: Text('Error: \$err', style: const TextStyle(color: AppColors.laserCoral))),
+            error: (err, stack) => const Center(child: Text('Error: \$err', style: TextStyle(color: AppColors.laserCoral))),
           );
         },
         loading: () => const Center(child: CircularProgressIndicator(color: AppColors.electricCyan)),
-        error: (err, stack) => Center(child: Text('Error: \$err', style: const TextStyle(color: AppColors.laserCoral))),
+        error: (err, stack) => const Center(child: Text('Error: \$err', style: TextStyle(color: AppColors.laserCoral))),
       ),
     );
   }
