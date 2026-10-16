@@ -92,19 +92,19 @@ class _SmartInputScreenState extends ConsumerState<SmartInputScreen> {
                     if (inferenceState.nominal > 0)
                       Chip(
                         label: Text(formatter.format(inferenceState.nominal)),
-                        backgroundColor: AppColors.neonMint.withOpacity(0.2),
+                        backgroundColor: AppColors.neonMint.withValues(alpha: 0.2),
                         labelStyle: const TextStyle(color: AppColors.neonMint),
                       ),
                     if (inferenceState.extractedKeyword.isNotEmpty)
                       Chip(
                         label: Text(inferenceState.extractedKeyword),
-                        backgroundColor: AppColors.cyberViolet.withOpacity(0.2),
+                        backgroundColor: AppColors.cyberViolet.withValues(alpha: 0.2),
                         labelStyle: const TextStyle(color: AppColors.cyberViolet),
                       ),
                     if (inferenceState.suggestedDebitAccountId != 0)
                       Chip(
                         label: Text(inferenceState.isFromKnowledgeCache ? 'Memory Cache' : 'Vector Inference'),
-                        backgroundColor: (inferenceState.isFromKnowledgeCache ? AppColors.neonMint : AppColors.cyberViolet).withOpacity(0.2),
+                        backgroundColor: (inferenceState.isFromKnowledgeCache ? AppColors.neonMint : AppColors.cyberViolet).withValues(alpha: 0.2),
                         labelStyle: TextStyle(color: inferenceState.isFromKnowledgeCache ? AppColors.neonMint : AppColors.cyberViolet),
                       ),
                   ],
@@ -197,7 +197,8 @@ class _SmartInputScreenState extends ConsumerState<SmartInputScreen> {
                             _selectedCreditId = null;
                           });
                           // Refresh accounts provider if needed or let Riverpod auto-refresh dependent providers
-                          ScaffoldMessenger.of(context).showSnackBar(
+                          if (!context.mounted) return;
+      ScaffoldMessenger.of(context).showSnackBar(
                             const SnackBar(content: Text('Transaksi Berhasil Disimpan')),
                           );
                         }
@@ -214,7 +215,7 @@ class _SmartInputScreenState extends ConsumerState<SmartInputScreen> {
           );
         },
         loading: () => const Center(child: CircularProgressIndicator(color: AppColors.electricCyan)),
-        error: (err, stack) => Center(child: Text('Error: \$err', style: const TextStyle(color: AppColors.laserCoral))),
+        error: (err, stack) => const Center(child: Text('Error: \$err', style: TextStyle(color: AppColors.laserCoral))),
       ),
     );
   }

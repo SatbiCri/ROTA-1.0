@@ -1,4 +1,3 @@
-import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';
@@ -79,7 +78,7 @@ class _GeneralJournalView extends ConsumerWidget {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text(first['tanggal'], style: const TextStyle(color: AppColors.secondaryText, fontSize: 12)),
-                        Text('#\$id', style: const TextStyle(color: AppColors.secondaryText, fontSize: 12)),
+                        const Text('#\$id', style: TextStyle(color: AppColors.secondaryText, fontSize: 12)),
                       ],
                     ),
                     const SizedBox(height: 8),
@@ -110,7 +109,7 @@ class _GeneralJournalView extends ConsumerWidget {
                           ],
                         ),
                       );
-                    }).toList(),
+                    }),
                   ],
                 ),
               ),
@@ -119,7 +118,7 @@ class _GeneralJournalView extends ConsumerWidget {
         );
       },
       loading: () => const Center(child: CircularProgressIndicator(color: AppColors.electricCyan)),
-      error: (e, s) => Center(child: Text('Error: \$e', style: const TextStyle(color: AppColors.laserCoral))),
+      error: (e, s) => const Center(child: Text('Error: \$e', style: TextStyle(color: AppColors.laserCoral))),
     );
   }
 }
@@ -157,7 +156,7 @@ class _LedgerViewState extends ConsumerState<_LedgerView> {
                 items: accounts.map((Akun akun) {
                   return DropdownMenuItem<int>(
                     value: akun.id,
-                    child: Text('\${akun.kodeAkun} - \${akun.namaAkun}'),
+                    child: const Text('\${akun.kodeAkun} - \${akun.namaAkun}'),
                   );
                 }).toList(),
                 onChanged: (val) {
@@ -166,7 +165,7 @@ class _LedgerViewState extends ConsumerState<_LedgerView> {
               );
             },
             loading: () => const CircularProgressIndicator(),
-            error: (e, s) => Text('Error', style: const TextStyle(color: AppColors.laserCoral)),
+            error: (e, s) => const Text('Error', style: TextStyle(color: AppColors.laserCoral)),
           ),
         ),
         if (_selectedAccountId != null)
@@ -182,8 +181,8 @@ class _LedgerViewState extends ConsumerState<_LedgerView> {
                   scrollDirection: Axis.horizontal,
                   child: SingleChildScrollView(
                     child: DataTable(
-                      headingRowColor: MaterialStateProperty.all(AppColors.cardSurface),
-                      dataRowColor: MaterialStateProperty.all(AppColors.canvasBackground),
+                      headingRowColor: WidgetStateProperty.all(AppColors.cardSurface),
+                      dataRowColor: WidgetStateProperty.all(AppColors.canvasBackground),
                       dividerThickness: 1,
                       border: TableBorder.all(color: AppColors.borderLine),
                       columns: const [
@@ -216,7 +215,7 @@ class _LedgerViewState extends ConsumerState<_LedgerView> {
                 );
               },
               loading: () => const Center(child: CircularProgressIndicator(color: AppColors.electricCyan)),
-              error: (e, s) => Center(child: Text('Error: \$e', style: const TextStyle(color: AppColors.laserCoral))),
+              error: (e, s) => const Center(child: Text('Error: \$e', style: TextStyle(color: AppColors.laserCoral))),
             ),
           ),
       ],
@@ -295,7 +294,7 @@ class _TrialBalanceView extends ConsumerWidget {
         final isBalanced = (sumDebit - sumKredit).abs() < 0.01;
 
         rows.add(DataRow(
-          color: MaterialStateProperty.all(AppColors.cardSurface),
+          color: WidgetStateProperty.all(AppColors.cardSurface),
           cells: [
             const DataCell(Text('')),
             const DataCell(Text('TOTAL', style: TextStyle(color: AppColors.primaryText, fontWeight: FontWeight.bold))),
@@ -308,8 +307,8 @@ class _TrialBalanceView extends ConsumerWidget {
           scrollDirection: Axis.horizontal,
           child: SingleChildScrollView(
             child: DataTable(
-              headingRowColor: MaterialStateProperty.all(AppColors.cardSurface),
-              dataRowColor: MaterialStateProperty.all(AppColors.canvasBackground),
+              headingRowColor: WidgetStateProperty.all(AppColors.cardSurface),
+              dataRowColor: WidgetStateProperty.all(AppColors.canvasBackground),
               dividerThickness: 1,
               border: TableBorder.all(color: AppColors.borderLine),
               columns: const [
@@ -324,7 +323,7 @@ class _TrialBalanceView extends ConsumerWidget {
         );
       },
       loading: () => const Center(child: CircularProgressIndicator(color: AppColors.electricCyan)),
-      error: (e, s) => Center(child: Text('Error: \$e', style: const TextStyle(color: AppColors.laserCoral))),
+      error: (e, s) => const Center(child: Text('Error: \$e', style: TextStyle(color: AppColors.laserCoral))),
     );
   }
 
