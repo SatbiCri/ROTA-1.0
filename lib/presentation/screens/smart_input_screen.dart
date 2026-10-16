@@ -92,19 +92,19 @@ class _SmartInputScreenState extends ConsumerState<SmartInputScreen> {
                     if (inferenceState.nominal > 0)
                       Chip(
                         label: Text(formatter.format(inferenceState.nominal)),
-                        backgroundColor: AppColors.neonMint.withValues(alpha: 0.2),
+                        backgroundColor: AppColors.neonMint.withOpacity(0.2),
                         labelStyle: const TextStyle(color: AppColors.neonMint),
                       ),
                     if (inferenceState.extractedKeyword.isNotEmpty)
                       Chip(
                         label: Text(inferenceState.extractedKeyword),
-                        backgroundColor: AppColors.cyberViolet.withValues(alpha: 0.2),
+                        backgroundColor: AppColors.cyberViolet.withOpacity(0.2),
                         labelStyle: const TextStyle(color: AppColors.cyberViolet),
                       ),
                     if (inferenceState.suggestedDebitAccountId != 0)
                       Chip(
                         label: Text(inferenceState.isFromKnowledgeCache ? 'Memory Cache' : 'Vector Inference'),
-                        backgroundColor: (inferenceState.isFromKnowledgeCache ? AppColors.neonMint : AppColors.cyberViolet).withValues(alpha: 0.2),
+                        backgroundColor: (inferenceState.isFromKnowledgeCache ? AppColors.neonMint : AppColors.cyberViolet).withOpacity(0.2),
                         labelStyle: TextStyle(color: inferenceState.isFromKnowledgeCache ? AppColors.neonMint : AppColors.cyberViolet),
                       ),
                   ],

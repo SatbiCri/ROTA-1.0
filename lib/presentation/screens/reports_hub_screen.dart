@@ -226,7 +226,7 @@ class _MemoryCenterView extends ConsumerWidget {
                       children: [
                         Chip(
                           label: const Text('Freq: \${mem.frekuensi}'),
-                          backgroundColor: AppColors.cyberViolet.withValues(alpha: 0.2),
+                          backgroundColor: AppColors.cyberViolet.withOpacity(0.2),
                           labelStyle: const TextStyle(color: AppColors.cyberViolet),
                         ),
                         IconButton(

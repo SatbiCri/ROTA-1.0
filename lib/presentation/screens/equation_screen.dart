@@ -93,7 +93,7 @@ class EquationScreen extends ConsumerWidget {
                         Container(
                           padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
                           decoration: BoxDecoration(
-                            color: isBalanced ? AppColors.neonMint.withValues(alpha: 0.2) : AppColors.laserCoral.withValues(alpha: 0.2),
+                            color: isBalanced ? AppColors.neonMint.withOpacity(0.2) : AppColors.laserCoral.withOpacity(0.2),
                             borderRadius: BorderRadius.circular(16),
                           ),
                           child: Text(
